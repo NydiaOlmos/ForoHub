@@ -27,7 +27,19 @@ public class Usuario {
     @JoinTable(
             name = "usuario_rol",
             joinColumns = @JoinColumn(name = "id_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "id_perfil")
+            inverseJoinColumns = @JoinColumn(name = "id_rol")
     )
     private List<Rol> roles;
+
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
+                ", contrasena='" + contrasena + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }
