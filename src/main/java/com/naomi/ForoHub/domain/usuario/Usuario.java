@@ -3,14 +3,13 @@ package com.naomi.ForoHub.domain.usuario;
 
 import com.naomi.ForoHub.domain.rol.Rol;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.validation.Valid;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +26,7 @@ public class Usuario implements UserDetails {
     private Long id;
     private String nombre;
     private String email;
+    @Setter
     private String contrasena;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -34,7 +34,24 @@ public class Usuario implements UserDetails {
             joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_rol")
     )
-    private List<Rol> roles;
+    private List<Rol> roles = new ArrayList<>();
+
+    public Usuario(@Valid DatosRegistroUsuario datos, Rol rol) {
+        this.id = null;
+        this.nombre = datos.nombre();
+        this.email = datos.email();
+        this.contrasena = datos.contrasena();
+        this.roles.add(rol);
+    }
+
+    public void actualizar(DatosActualizacionUsuario datos) {
+        if (datos.nombre() != null) {
+            this.nombre = datos.nombre();
+        }
+        if (datos.contasena() != null) {
+            this.contrasena = datos.contasena();
+        }
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
