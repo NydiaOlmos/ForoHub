@@ -36,7 +36,6 @@ public class TopicoController {
     @Transactional
     @PostMapping
     public ResponseEntity registro(@RequestBody @Valid DatosRegistroTopico datos, UriComponentsBuilder uriBuilder) {
-        System.out.println(datos);
         var autor = usuarioRepository.getReferenceById(datos.idUsuario());
         var curso = cursoRepository.getReferenceById(datos.idCurso());
         var topico = new Topico(datos, autor, curso);
@@ -70,7 +69,6 @@ public class TopicoController {
     @Transactional
     @PutMapping
     public ResponseEntity actualizarTopico(@RequestBody @Valid DatosActualizacionTopico datos) {
-        System.out.println(datos);
         var topico = topicoRepository.getReferenceById(datos.id());
         Usuario autor = null;
         Curso curso = null;
