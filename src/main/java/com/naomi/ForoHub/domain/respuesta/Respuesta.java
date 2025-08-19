@@ -21,11 +21,13 @@ public class Respuesta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String mensaje;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "topico")
     private Topico topico;
     @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "autor")
     private Usuario autor;
     private Boolean solucion;
 }

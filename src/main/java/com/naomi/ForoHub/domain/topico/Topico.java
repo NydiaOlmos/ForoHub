@@ -30,12 +30,14 @@ public class Topico {
     @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion;
     private Boolean status;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor")
     private Usuario autor;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "curso")
     private Curso curso;
+    @OneToMany(mappedBy = "topico", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Respuesta> respuestas = new ArrayList<>();
 
 
 
@@ -75,5 +77,9 @@ public class Topico {
         if (datos.idCurso() != null) {
             this.curso = curso;
         }
+    }
+
+    public void agregarRespuesta(Respuesta respuesta) {
+        this.respuestas.add(respuesta);
     }
 }
