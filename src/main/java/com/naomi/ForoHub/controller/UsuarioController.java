@@ -79,13 +79,13 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     public ResponseEntity mostrarUsuario(@PathVariable Long id) {
-        var usuario = usuarioRepository.getReferenceById(id);
+        var usuario = usuarioRepository.getReferenceByIdAndActivoTrue(id);
         return ResponseEntity.ok(new DatosDetallesUsuario(usuario));
     }
 
     @GetMapping
     public ResponseEntity<PagedModel<EntityModel<DatosDetallesUsuario>>> listaUsuarios(@PageableDefault(size = 10, sort = {"nombre"}) Pageable paginacion) {
-        Page<DatosDetallesUsuario> pagina = usuarioRepository.findAll(paginacion).map(DatosDetallesUsuario::new);
+        Page<DatosDetallesUsuario> pagina = usuarioRepository.findAllActivos(paginacion).map(DatosDetallesUsuario::new);
         var page = pagedResourcesAssembler.toModel(pagina, datosListaUsuarioModelAssembler);
         return ResponseEntity.ok(page);
     }
@@ -93,7 +93,8 @@ public class UsuarioController {
     @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity eliminarUsuario(@PathVariable Long id) {
-        usuarioRepository.deleteById(id);
+        var usuario = usuarioRepository.getReferenceById(id);
+        usuario.desactivar();
         return ResponseEntity.noContent().build();
     }
 

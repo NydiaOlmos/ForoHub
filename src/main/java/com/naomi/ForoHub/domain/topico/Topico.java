@@ -6,10 +6,7 @@ import com.naomi.ForoHub.domain.respuesta.Respuesta;
 import com.naomi.ForoHub.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,6 +26,7 @@ public class Topico {
     private String mensaje;
     @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion;
+    @Setter
     private Boolean status;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor")

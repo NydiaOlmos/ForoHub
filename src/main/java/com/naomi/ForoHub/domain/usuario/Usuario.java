@@ -28,6 +28,7 @@ public class Usuario implements UserDetails {
     private String email;
     @Setter
     private String contrasena;
+    private Boolean activo = true;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "usuario_rol",
@@ -51,6 +52,10 @@ public class Usuario implements UserDetails {
         if (datos.contasena() != null) {
             this.contrasena = datos.contasena();
         }
+    }
+
+    public void desactivar(){
+        this.activo = false;
     }
 
     @Override
