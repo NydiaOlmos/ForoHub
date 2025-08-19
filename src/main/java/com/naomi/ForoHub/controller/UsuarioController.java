@@ -4,6 +4,7 @@ import com.naomi.ForoHub.domain.rol.RolRepository;
 import com.naomi.ForoHub.domain.usuario.*;
 import com.naomi.ForoHub.infra.security.DatosTokenJWT;
 import com.naomi.ForoHub.infra.security.TokenService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/usuarios")
+@SecurityRequirement(name = "bearer-key")
 public class UsuarioController {
     @Autowired
     private TokenService tokenService;

@@ -5,6 +5,7 @@ import com.naomi.ForoHub.domain.curso.CursoRepository;
 import com.naomi.ForoHub.domain.topico.*;
 import com.naomi.ForoHub.domain.usuario.Usuario;
 import com.naomi.ForoHub.domain.usuario.UsuarioRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name = "bearer-key")
 public class TopicoController {
     @Autowired
     private PagedResourcesAssembler<DatosDetallesTopico> pagedResourcesAssembler;

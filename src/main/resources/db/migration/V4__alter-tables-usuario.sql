@@ -1,1 +1,0 @@
-alter table usuarios add unique (nombre);

@@ -1,6 +1,6 @@
 create table cursos (
     id bigint not null GENERATED ALWAYS AS IDENTITY,
-    nombre varchar(100) not null,
+    nombre varchar(100) not null unique,
     categoria varchar(100) not null,
 
     primary key(id)
@@ -11,13 +11,14 @@ create table usuarios (
     nombre varchar(100) not null,
     email varchar(100) not null unique,
     contrasena varchar(255) not null,
+    activo boolean not null,
 
     primary key(id)
 );
 
 create table topicos (
     id bigint not null GENERATED ALWAYS AS IDENTITY,
-    titulo varchar(100) not null,
+    titulo varchar(100) not null unique,
     mensaje text not null,
     fecha_creacion TIMESTAMP not null,
     status BOOLEAN not null,

@@ -1,11 +1,11 @@
 package com.naomi.ForoHub.controller;
 
-import com.naomi.ForoHub.domain.curso.DatosRegistroCurso;
 import com.naomi.ForoHub.domain.respuesta.*;
 import com.naomi.ForoHub.domain.topico.Topico;
 import com.naomi.ForoHub.domain.topico.TopicoRepository;
 import com.naomi.ForoHub.domain.usuario.Usuario;
 import com.naomi.ForoHub.domain.usuario.UsuarioRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/respuesta")
+@SecurityRequirement(name = "bearer-key")
 public class RespuestaController {
     @Autowired
     private RespuestaRepository respuestaRepository;
