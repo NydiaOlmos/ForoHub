@@ -18,4 +18,19 @@ public class Curso {
     private Long id;
     private String nombre;
     private String categoria;
+
+    public Curso(DatosRegistroCurso datos) {
+        this.id = null;
+        this.nombre = datos.nombre();
+        this.categoria = datos.categoria();
+    }
+
+    public void actualizar(DatosActualizacionCurso datos) {
+        if (datos.categoria() != null) {
+            this.categoria = datos.categoria();
+        }
+        if (datos.nombre() != null) {
+            this.nombre = datos.nombre();
+        }
+    }
 }

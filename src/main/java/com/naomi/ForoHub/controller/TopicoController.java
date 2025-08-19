@@ -45,14 +45,6 @@ public class TopicoController {
         return ResponseEntity.created(uri).body(new DatosDetallesTopico(topico, generadorEstado(topico.getStatus())));
     }
 
-    private String generadorEstado(Boolean status) {
-        if(status){
-            return "Resuelto";
-        } else  {
-            return "Abierto";
-        }
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity mostrarTopico(@PathVariable Long id) {
         var topico = topicoRepository.getReferenceById(id);
@@ -87,5 +79,13 @@ public class TopicoController {
     public ResponseEntity eliminarTopico(@PathVariable Long id) {
         topicoRepository.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    private String generadorEstado(Boolean status) {
+        if(status){
+            return "Resuelto";
+        } else  {
+            return "Abierto";
+        }
     }
 }
